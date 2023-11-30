@@ -1,16 +1,11 @@
 describe('Login', () => {
 
   it('realizar login com sucesso', () => {
-    cy.login();
+    const user = Cypress.env('user_name');
+    const password = Cypress.env('user_password');
+    const options = {cachesession: false };
+    
+    cy.login(user, password, options);
     cy.get('.logo-text').should('be.visible');
   })
-
-  it.only('realizar logout com sucesso', () => {
-    cy.login();
-    cy.get('.qa-user-avatar').should('be.visible');
-    cy.logout();
-    cy.get('[data-qa-selector="login_field"]').should('be.visible');
-    cy.get('[data-qa-selector="password_field"]').should('be.visible');
-    cy.get('[data-qa-selector="sign_in_button"]').should('be.visible');
-  });
 })
